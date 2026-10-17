@@ -19,14 +19,28 @@ const LOCAL_SPEC = {
   minLength: 32,
 };
 
-chrome.runtime.onInstalled.addListener(async ({ reason }) => {
-  if (reason !== 'install') return;
+async function ensureRegistered() {
   try {
-    await chrome.scripting.registerContentScripts(REGISTRATIONS);
+    const registered = await chrome.scripting.getRegisteredContentScripts({
+      ids: REGISTRATION_IDS,
+    });
+    if (registered.length === 0) {
+      await chrome.scripting.registerContentScripts(REGISTRATIONS);
+    }
   } catch (err) {
     console.error('FlowPass setup failed:', err.message);
   }
+}
+
+chrome.runtime.onInstalled.addListener(async () => {
+  await ensureRegistered();
 });
+
+chrome.runtime.onStartup.addListener(async () => {
+  await ensureRegistered();
+});
+
+ensureRegistered();
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (sender.id !== chrome.runtime.id) return;

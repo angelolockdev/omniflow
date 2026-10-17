@@ -1,12 +1,13 @@
 {
   "manifest_version": 3,
   "name": "FlowPass",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "minimum_chrome_version": "111",
   "description": "Seamlessly access Google Flow from anywhere without changing your account region.",
   "homepage_url": "https://zephinax.com",
   "permissions": [
-    "scripting"
+    "scripting",
+    "tabs"
   ],
   "host_permissions": [
     "https://flow.google.com/*"
@@ -48,6 +49,16 @@
         "stat.js"
       ],
       "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "engine.js"
+      ],
+      "matches": [
+        "https://flow.google.com/*"
+      ]
     }
   ]
 }
