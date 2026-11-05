@@ -16,3 +16,8 @@ build/
 # Editor & IDE files
 .vscode/
 .idea/
+
+.superpowers/
+
+supabase/
+docs/

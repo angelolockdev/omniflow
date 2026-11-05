@@ -1,22 +1,24 @@
 {
   "manifest_version": 3,
-  "name": "FlowPass",
-  "version": "1.2.0",
+  "name": "OmniFlow",
+  "version": "1.0.0",
   "minimum_chrome_version": "111",
-  "description": "Seamlessly access Google Flow from anywhere without changing your account region.",
-  "homepage_url": "https://zephinax.com",
+  "description": "Autonomous client-side region adaptation engine for Google Flow.",
+  "homepage_url": "https://angelolockdev.github.io/omniflow/",
   "permissions": [
     "scripting",
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "host_permissions": [
-    "https://flow.google.com/*"
+    "https://flow.google.com/*",
+    "https://omniflow-admin.vercel.app/*"
   ],
   "background": {
     "service_worker": "app.js"
   },
   "action": {
-    "default_title": "FlowPass",
+    "default_title": "OmniFlow",
     "default_popup": "panel.html",
     "default_icon": {
       "16": "assets/icon-16.png",

@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none';">
-<title>FlowPass</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self' https://omniflow-admin.vercel.app;">
+<title>OmniFlow</title>
 <link rel="stylesheet" href="panel.css">
 </head>
 <body>
@@ -18,14 +18,14 @@
   <header class="app-header">
     <div class="brand-wrap">
       <div class="brand-icon-box">
-        <img class="brand-icon" src="assets/icon.png" alt="FlowPass" width="24" height="27">
+        <img class="brand-icon" src="assets/icon-48.png" alt="OmniFlow" width="24" height="24">
       </div>
       <div class="brand-text">
         <div class="brand-title-row">
-          <img class="brand-logotype" src="assets/logo-type.png" alt="FlowPass" height="19">
-          <span class="version-badge">v1.2.0</span>
+          <img class="brand-logotype" src="assets/logo-type.png" alt="OmniFlow" height="19">
+          <span class="version-badge">v1.0.0</span>
         </div>
-        <span class="brand-caption">Autonomous Flow Controller</span>
+        <span class="brand-caption">Autonomous Region Engine</span>
       </div>
     </div>
     <a href="info.html" target="_blank" rel="noopener noreferrer" class="icon-link-btn" title="Documentation & Guide" aria-label="Documentation and Guide">
@@ -36,6 +36,34 @@
       </svg>
     </a>
   </header>
+
+  <!-- Access License Card -->
+  <section id="license-card" class="card license-card">
+    <div class="license-header">
+      <span class="license-label">ACCESS LICENSE</span>
+      <span id="license-badge" class="license-badge">REQUIRED</span>
+    </div>
+
+    <form id="token-form" class="license-form" autocomplete="off">
+      <input
+        id="token-input"
+        class="token-input"
+        type="text"
+        placeholder="OMNI-XXXX-XXXX-XXXX"
+        spellcheck="false"
+        aria-label="OmniFlow Access Token"
+      >
+      <button id="token-submit" class="token-submit-btn" type="submit">Activate</button>
+    </form>
+
+    <div id="token-active-view" class="token-active-view" hidden>
+      <div class="token-active-info">
+        <span id="token-masked" class="token-masked">OMNI-••••-XXXX</span>
+        <span id="token-meta" class="token-meta-text">Active • 1/2 devices</span>
+      </div>
+      <button id="token-logout" class="token-logout-btn" type="button" title="Disconnect Token">Disconnect</button>
+    </div>
+  </section>
 
   <!-- Hero Status Card -->
   <section id="status-card" class="card hero-status-card" data-state="idle">
@@ -50,9 +78,8 @@
 
     <div class="status-body">
       <h2 id="status-title" class="status-title">Checking status…</h2>
-      <p id="status-desc" class="status-desc">Connecting to helper script…</p>
-      
-      <!-- Compatibility anchor for legacy scripts -->
+      <p id="status-desc" class="status-desc">Connecting to OmniFlow engine…</p>
+
       <div id="status" class="legacy-status-anchor" aria-hidden="true">
         <span class="status-dot"></span>
         <span class="status-text"></span>
@@ -63,7 +90,7 @@
     <div class="toggle-island">
       <div class="toggle-info">
         <span class="toggle-title">Protection Engine</span>
-        <span class="toggle-subtitle">Client-side region bypass</span>
+        <span class="toggle-subtitle">Client-side region adaptation</span>
       </div>
       <button id="toggle" class="switch" role="switch" aria-checked="false" aria-label="Enable Protection Engine" disabled>
         <span class="switch-track">
@@ -91,7 +118,7 @@
       </div>
       <div class="matrix-item">
         <span class="matrix-label">OPERATION</span>
-        <div class="matrix-value">In-Memory XHR</div>
+        <div class="matrix-value">In-Memory Core</div>
       </div>
       <div class="matrix-item">
         <span class="matrix-label">INTERCEPTOR</span>
@@ -134,10 +161,10 @@
       <svg class="footer-shield" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
       </svg>
-      <span>Local Sandbox • Zero Telemetry</span>
+      <span>Local Sandbox • Zero VPN Lag</span>
     </div>
-    <a href="https://zephinax.com" target="_blank" rel="noopener noreferrer" class="footer-link">
-      zephinax.com
+    <a href="https://angelolockdev.github.io/omniflow/" target="_blank" rel="noopener noreferrer" class="footer-link">
+      OmniFlow v1.0
     </a>
   </footer>
 </main>

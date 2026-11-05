@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # ==============================================================================
-# FlowPass - GitHub Release & Extension Packaging Helper
+# OmniFlow - GitHub Release & Extension Packaging Helper
 # ==============================================================================
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -23,7 +23,7 @@ log_warn() { echo -e "${YELLOW}[WARN]${NC} $*"; }
 log_error() { echo -e "${RED}[ERROR]${NC} $*" >&2; }
 
 print_usage() {
-  echo -e "${BOLD}FlowPass Release Helper${NC}
+  echo -e "${BOLD}OmniFlow Release Helper${NC}
 
 Usage:
   ./scripts/release.sh [OPTIONS] [VERSION]
@@ -187,7 +187,7 @@ fi
 # Package extension
 DIST_DIR="$REPO_ROOT/dist"
 mkdir -p "$DIST_DIR"
-ZIP_NAME="flowpass-$TAG_NAME.zip"
+ZIP_NAME="omniflow-$TAG_NAME.zip"
 ZIP_PATH="$DIST_DIR/$ZIP_NAME"
 
 log_info "Packaging extension archive..."
@@ -231,7 +231,7 @@ fi
 # Build gh release create arguments
 GH_ARGS=(
   release create "$TAG_NAME" "$ZIP_PATH"
-  --title "FlowPass $TAG_NAME"
+  --title "OmniFlow $TAG_NAME"
 )
 
 if [[ "$IS_DRAFT" == true ]]; then
@@ -254,7 +254,7 @@ gh "${GH_ARGS[@]}"
 log_info "Syncing local git tags..."
 git fetch origin --tags -q
 
-RELEASE_URL="https://github.com/zephinax/flowpass/releases/tag/$TAG_NAME"
+RELEASE_URL="https://github.com/angelolockdev/omniflow/releases/tag/$TAG_NAME"
 echo ""
 log_success "Release ${BOLD}$TAG_NAME${NC} successfully published!"
 echo -e "URL: ${BOLD}${GREEN}$RELEASE_URL${NC}"

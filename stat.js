@@ -1,4 +1,4 @@
-const DIAGNOSTIC_ATTRIBUTE = 'data-flow-local-diagnostic';
+const DIAGNOSTIC_ATTRIBUTE = 'data-omniflow-state';
 const MAX_STATE_LENGTH = 80;
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {

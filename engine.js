@@ -1,28 +1,31 @@
 (() => {
   'use strict';
 
-  if (typeof window !== 'undefined' && window.__flowLocalDiagnostic) return;
+  if (typeof window !== 'undefined' && window.__omniflowState) return;
 
-  const DIAGNOSTIC_ATTR = 'data-flow-local-diagnostic';
-  const diagnostic = (typeof window !== 'undefined' && (window.__flowLocalDiagnostic = {
-    state: 'armed',
+  const DIAGNOSTIC_ATTR = 'data-omniflow-state';
+  const SPEC_MESSAGE_TYPE = 'omniflow:config';
+  const SPEC_REQUEST_TYPE = 'omniflow:config-request';
+
+  const diagnostic = (typeof window !== 'undefined' && (window.__omniflowState = {
+    state: 'awaiting-spec',
     applied: 0,
     before: null,
-  })) || { state: 'armed', applied: 0 };
+  })) || { state: 'awaiting-spec', applied: 0, before: null };
 
-  let spec = {
-    origin: 'https://flow.google.com',
-    path: '/_/AiSandboxAngularFrontend/data/batchexecute',
-    rpcids: 'cPZSdc',
-    tag: 'wrb.fr',
-    flagIndex: 30,
-    minLength: 32,
-  };
+  let spec = undefined;
+  let resolveSpecReady;
+  const specReadyPromise = new Promise((resolve) => {
+    resolveSpecReady = resolve;
+    if (typeof setTimeout === 'function') {
+      setTimeout(() => resolve(spec || null), 1500);
+    }
+  });
 
   function setDiagnostic(state, before) {
     diagnostic.state = state;
     if (before !== undefined) diagnostic.before = before;
-    console.info('[FlowPass]', JSON.stringify(diagnostic));
+    console.info('[OmniFlow]', JSON.stringify(diagnostic));
 
     const syncAttr = () => {
       if (typeof document !== 'undefined' && document.documentElement) {
@@ -39,29 +42,39 @@
     }
   }
 
-  function isBatchexecuteRequest(rawUrl) {
-    if (!rawUrl) return false;
+  function isBatchexecuteRequest(rawUrl, currentSpec = spec) {
+    if (!rawUrl || !currentSpec || typeof currentSpec !== 'object' || !currentSpec.rpcids) {
+      return false;
+    }
     try {
-      const parsedUrl = new URL(rawUrl, (typeof location !== 'undefined' && location.href) || 'https://flow.google.com');
-      if (typeof location !== 'undefined' && parsedUrl.origin !== location.origin) return false;
+      const baseHref = (typeof location !== 'undefined' && location.href) || currentSpec.origin || 'https://flow.google.com';
+      const parsedUrl = new URL(rawUrl, baseHref);
+      const expectedOrigin = (typeof location !== 'undefined' && location.origin) || currentSpec.origin || 'https://flow.google.com';
+      if (parsedUrl.origin !== expectedOrigin) return false;
       if (!parsedUrl.pathname.includes('/data/batchexecute')) return false;
 
       const rpcidsParam = parsedUrl.searchParams.get('rpcids');
       if (rpcidsParam) {
         const ids = rpcidsParam.split(',');
-        if (ids.includes(spec.rpcids)) return true;
+        if (ids.includes(currentSpec.rpcids)) return true;
       }
-      if (parsedUrl.search.includes(spec.rpcids)) return true;
+      if (parsedUrl.search.includes(currentSpec.rpcids)) return true;
       return false;
     } catch {
       return false;
     }
   }
 
-  function patchResponseBody(responseBody, currentSpec) {
+  function patchResponseBody(responseBody, currentSpec = spec) {
+    if (!currentSpec || typeof currentSpec !== 'object') {
+      throw new Error('OmniFlow spec is not loaded');
+    }
+
     const lines = responseBody.split('\n');
     let beforeValue;
     let patchCount = 0;
+    const flagIndex = Number.isInteger(currentSpec.flagIndex) ? currentSpec.flagIndex : 30;
+    const ageFlagIndex = Number.isInteger(currentSpec.ageFlagIndex) ? currentSpec.ageFlagIndex : flagIndex + 1;
 
     for (let i = 0; i < lines.length; i++) {
       if (!lines[i].startsWith('[[')) continue;
@@ -89,17 +102,15 @@
           throw new Error('Unexpected config schema: payload is not an array');
         }
 
-        // Expand payload if it was truncated
-        while (payload.length <= currentSpec.flagIndex) {
+        while (payload.length <= flagIndex) {
           payload.push(null);
         }
 
-        beforeValue = payload[currentSpec.flagIndex];
-        payload[currentSpec.flagIndex] = true;
+        beforeValue = payload[flagIndex];
+        payload[flagIndex] = true;
 
-        // Also ensure age-restriction flag (index 31, field 32) is not false
-        if (payload.length > currentSpec.flagIndex + 1 && payload[currentSpec.flagIndex + 1] === false) {
-          payload[currentSpec.flagIndex + 1] = true;
+        if (payload.length > ageFlagIndex && payload[ageFlagIndex] === false) {
+          payload[ageFlagIndex] = true;
         }
 
         patchCount++;
@@ -132,23 +143,25 @@
     };
   }
 
-  // CommonJS export support for testing
   if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
-      patch: (body) => patchResponseBody(body, spec),
+      patch: (body, customSpec) => patchResponseBody(body, customSpec !== undefined ? customSpec : spec),
       isBatchexecuteRequest,
     };
   }
 
   if (typeof window === 'undefined') return;
 
-  // 1. Hook window.fetch (used by modern Angular/Boq transport in flow.google.com)
   if (typeof window.fetch === 'function') {
     const originalFetch = window.fetch;
     window.fetch = async function(input, init) {
       const rawUrl = input instanceof Request ? input.url : String(input);
 
-      if (!isBatchexecuteRequest(rawUrl)) {
+      if (rawUrl && rawUrl.includes('/data/batchexecute') && spec === undefined) {
+        await specReadyPromise;
+      }
+
+      if (!isBatchexecuteRequest(rawUrl, spec)) {
         return originalFetch.apply(this, arguments);
       }
 
@@ -157,7 +170,7 @@
         const cloned = response.clone();
         const text = await cloned.text();
 
-        if (text.includes(spec.tag) && text.includes(spec.rpcids)) {
+        if (spec && text.includes(spec.tag) && text.includes(spec.rpcids)) {
           const patched = patchResponseBody(text, spec);
           diagnostic.applied++;
           setDiagnostic('applied', patched.before);
@@ -172,7 +185,7 @@
           });
         }
       } catch (err) {
-        console.warn('[FlowPass] Fetch patch failed:', err);
+        console.warn('[OmniFlow] Fetch patch failed:', err);
         setDiagnostic('schema mismatch — unchanged');
       }
 
@@ -180,7 +193,6 @@
     };
   }
 
-  // 2. Hook XMLHttpRequest (fallback / legacy transport)
   if (typeof XMLHttpRequest !== 'undefined') {
     const targetXhrMap = new WeakMap();
     const appliedXhrMap = new WeakMap();
@@ -190,7 +202,7 @@
     xhrProto.open = function(method, url, ...args) {
       let isTarget = false;
       try {
-        isTarget = isBatchexecuteRequest(url);
+        isTarget = isBatchexecuteRequest(url, spec);
       } catch {}
       targetXhrMap.set(this, isTarget);
       appliedXhrMap.delete(this);
@@ -210,7 +222,7 @@
 
           if (!appliedXhrMap.has(this)) {
             try {
-              if (raw.includes(spec.tag) && raw.includes(spec.rpcids)) {
+              if (spec && raw.includes(spec.tag) && raw.includes(spec.rpcids)) {
                 const patched = patchResponseBody(raw, spec);
                 appliedXhrMap.set(this, patched.body);
                 diagnostic.applied++;
@@ -219,7 +231,7 @@
                 appliedXhrMap.set(this, raw);
               }
             } catch (err) {
-              console.warn('[FlowPass] XHR patch failed:', err);
+              console.warn('[OmniFlow] XHR patch failed:', err);
               appliedXhrMap.set(this, raw);
               setDiagnostic('schema mismatch — unchanged');
             }
@@ -230,15 +242,25 @@
     }
   }
 
-  // 3. Listen for spec updates from link.js
   window.addEventListener('message', (event) => {
     if (event.source !== window) return;
     const data = event.data;
-    if (!data || data.type !== 'cfc-flow-spec') return;
-    if (data.spec && typeof data.spec === 'object') {
-      spec = Object.assign({}, spec, data.spec);
+    if (!data || data.type !== SPEC_MESSAGE_TYPE) return;
+    if (data.spec && typeof data.spec === 'object' && data.spec.rpcids) {
+      spec = Object.assign({}, data.spec);
+      if (resolveSpecReady) resolveSpecReady(spec);
+      if (diagnostic.applied === 0) {
+        setDiagnostic('armed');
+      }
+    } else {
+      spec = null;
+      if (resolveSpecReady) resolveSpecReady(null);
+      setDiagnostic('unauthenticated');
     }
   });
 
-  setDiagnostic('armed');
+  setDiagnostic('awaiting-spec');
+  try {
+    window.postMessage({ type: SPEC_REQUEST_TYPE }, location.origin);
+  } catch {}
 })();
