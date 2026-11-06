@@ -1,21 +1,21 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="en" class="dark" dir="ltr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="dark" />
-  <title>OmniFlow — Instant Region Unlock for Google Flow (MV3)</title>
-  <meta name="description" content="Access Google Flow from any country at native connection speed. Zero VPN throttling, zero account country changes, instant in-browser activation." />
+  <title>OmniFlow — Regional Acceleration &amp; Stream Unlock for Google Flow</title>
+  <meta name="description" content="Access Google Flow globally at native connection speed. Zero VPN throttling, zero account country migration, client-side in-memory adaptation." />
   <link rel="canonical" href="https://angelolockdev.github.io/omniflow/" />
 
-  <!-- OpenGraph / Social -->
+  <!-- OpenGraph / Social Cards -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://angelolockdev.github.io/omniflow/" />
-  <meta property="og:title" content="OmniFlow — Instant Region Unlock for Google Flow" />
-  <meta property="og:description" content="Unlock Google Flow anywhere without VPN bandwidth bottlenecks or modifying your Google account country." />
+  <meta property="og:title" content="OmniFlow — Regional Acceleration for Google Flow" />
+  <meta property="og:description" content="Access Google Flow from anywhere without VPN bottlenecks or Google Account country modifications." />
   <meta property="og:image" content="https://angelolockdev.github.io/omniflow/assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="OmniFlow — Instant Region Unlock for Google Flow" />
+  <meta name="twitter:title" content="OmniFlow — Regional Acceleration for Google Flow" />
   <meta name="twitter:description" content="Autonomous client-side region adaptation engine for Google Flow." />
   <meta name="twitter:image" content="https://angelolockdev.github.io/omniflow/assets/og-image.png" />
 
@@ -23,10 +23,10 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/icon-16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icon-128.png" />
 
-  <!-- Expressive Display + Restrained Body + Technical Mono (ui-ux-pro-max & frontend-design) -->
+  <!-- Typography: Space Grotesk (Display) + DM Sans (Body) + JetBrains Mono (Tech Data) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Structured Data: SoftwareApplication & FAQPage -->
   <script type="application/ld+json">
@@ -52,26 +52,26 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Does OmniFlow route my traffic through a proxy or VPN?",
+            "name": "Does OmniFlow route video traffic through external VPN proxies?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. OmniFlow runs locally inside your browser sandbox. Your video streams and creative assets load directly from Google servers at 100% of your native internet speed."
+              "text": "No. OmniFlow runs locally inside your browser sandbox. All video generations and creative streams load directly from Google servers at 100% of your native connection speed."
             }
           },
           {
             "@type": "Question",
-            "name": "Do I need to change my Google Account country or payment profile?",
+            "name": "Will this impact my Google Account country or payment profiles?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Never. OmniFlow adapts regional eligibility checks in-memory before the page router redirects, leaving your Google account settings and payment profiles untouched."
+              "text": "Never. OmniFlow handles regional parameters in-memory before the router redirects, leaving your Google Workspace, billing, and Play Store profiles completely untouched."
             }
           },
           {
             "@type": "Question",
-            "name": "Which browsers are supported?",
+            "name": "Which Chromium browsers are supported?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Any Chromium-based browser supporting Manifest V3 (version 111+): Google Chrome, Brave, Microsoft Edge, Arc, Opera, and Vivaldi."
+              "text": "Any Chromium-based browser supporting Manifest V3: Google Chrome, Brave Browser, Microsoft Edge, Arc Browser, and Opera."
             }
           }
         ]
@@ -81,48 +81,60 @@
   </script>
 
   <style>
+    /* ------------------------------------------------------------- */
+    /* shadcn/ui Design System & CSS Variables (Dark Neutral Theme)  */
+    /* ------------------------------------------------------------- */
     :root {
-      --bg-void: #040711;
-      --bg-deep: #080d1d;
-      --surface-glass: rgba(13, 20, 38, 0.76);
-      --surface-elevated: rgba(19, 29, 54, 0.88);
-      --surface-interactive: rgba(255, 255, 255, 0.035);
-      --surface-interactive-hover: rgba(255, 255, 255, 0.07);
-
-      --border-hairline: rgba(255, 255, 255, 0.07);
-      --border-strong: rgba(255, 255, 255, 0.14);
-      --border-accent: rgba(99, 102, 241, 0.45);
-      --border-cyan: rgba(6, 182, 212, 0.4);
-
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
-
-      --accent-indigo: #6366f1;
-      --accent-cyan: #06b6d4;
-      --accent-cyan-bright: #22d3ee;
-      --accent-emerald: #10b981;
+      --background: #09090b;          /* Zinc-950 */
+      --foreground: #fafafa;          /* Zinc-50 */
+      
+      --card: rgba(18, 18, 22, 0.72); /* Glass Card */
+      --card-solid: #111114;
+      --card-foreground: #fafafa;
+      
+      --popover: #111114;
+      --popover-foreground: #fafafa;
+      
+      --primary: #f4f4f5;             /* High-contrast CTA */
+      --primary-foreground: #09090b;
+      
+      --secondary: #27272a;           /* Zinc-800 */
+      --secondary-foreground: #fafafa;
+      
+      --muted: #1c1c20;
+      --muted-foreground: #a1a1aa;    /* Zinc-400 */
+      
+      --accent: #27272a;
+      --accent-foreground: #fafafa;
+      --accent-brand: #3b82f6;        /* Electric Blue */
+      --accent-emerald: #10b981;      /* Telemetry Green */
       --accent-amber: #f59e0b;
-
-      --grad-primary: linear-gradient(135deg, #6366f1 0%, #06b6d4 55%, #10b981 100%);
-      --grad-primary-hover: linear-gradient(135deg, #818cf8 0%, #22d3ee 55%, #34d399 100%);
-      --grad-text: linear-gradient(135deg, #a5b4fc 0%, #38bdf8 48%, #34d399 100%);
-
-      --font-display: 'Space Grotesk', sans-serif;
-      --font-body: 'DM Sans', sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-
-      --radius-2xl: 24px;
-      --radius-xl: 16px;
-      --radius-lg: 12px;
+      
+      --border: #27272a;              /* 1px Hairline */
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-highlight: rgba(59, 130, 246, 0.4);
+      --input: #27272a;
+      --ring: #3b82f6;
+      
+      --radius-sm: 6px;
       --radius-md: 8px;
-      --radius-pill: 9999px;
-
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --radius-2xl: 22px;
+      --radius-full: 9999px;
+      
+      --font-display: 'Space Grotesk', -apple-system, sans-serif;
+      --font-body: 'DM Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     *, *::before, *::after {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     html {
@@ -131,42 +143,50 @@
     }
 
     body {
-      margin: 0;
-      background-color: var(--bg-void);
-      color: var(--text-primary);
+      background-color: var(--background);
+      color: var(--foreground);
       font-family: var(--font-body);
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
+      min-height: 100dvh;
     }
 
-    /* Atmospheric Orbital Mesh Background */
-    .orbital-backdrop {
+    /* Ambient Background Mesh (Non-intrusive, Fixed, High Performance) */
+    .bg-mesh-container {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 0;
-      background:
-        radial-gradient(circle at 15% 12%, rgba(99, 102, 241, 0.16), transparent 42%),
-        radial-gradient(circle at 82% 18%, rgba(6, 182, 212, 0.14), transparent 45%),
-        radial-gradient(circle at 50% 85%, rgba(16, 185, 129, 0.08), transparent 50%);
+      overflow: hidden;
     }
 
-    .orbital-grid {
-      position: fixed;
+    .bg-gradient-top {
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1000px;
+      height: 550px;
+      background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.12) 0%, rgba(16, 185, 129, 0.04) 45%, transparent 70%);
+      filter: blur(80px);
+    }
+
+    .bg-grid-overlay {
+      position: absolute;
       inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      background-image:
-        linear-gradient(to right, rgba(255, 255, 255, 0.022) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
-      background-size: 56px 56px;
-      mask-image: radial-gradient(ellipse 80% 65% at 50% 25%, #000 40%, transparent 100%);
-      -webkit-mask-image: radial-gradient(ellipse 80% 65% at 50% 25%, #000 40%, transparent 100%);
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 20%, #000 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 20%, #000 30%, transparent 100%);
     }
 
-    .container {
+    /* Page Container */
+    .site-container {
       position: relative;
       z-index: 1;
       width: 100%;
@@ -175,662 +195,966 @@
       padding: 0 24px;
     }
 
-    /* Floating Glass Navbar (ui-ux-pro-max top-4 spacing) */
-    .nav-wrapper {
+    /* ------------------------------------------------------------- */
+    /* shadcn Floating Navigation Bar                                */
+    /* ------------------------------------------------------------- */
+    .nav-anchor {
       position: fixed;
       top: 16px;
-      left: 16px;
-      right: 16px;
+      left: 0;
+      right: 0;
       z-index: 50;
       display: flex;
       justify-content: center;
+      padding: 0 16px;
       pointer-events: none;
     }
 
-    .navbar {
+    .nav-bar {
       pointer-events: auto;
       width: 100%;
-      max-width: 1160px;
+      max-width: 1080px;
+      height: 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 20px;
-      border-radius: var(--radius-pill);
-      background: rgba(8, 13, 29, 0.82);
-      border: 1px solid var(--border-strong);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6);
+      padding: 0 16px;
+      border-radius: var(--radius-full);
+      background: rgba(14, 14, 18, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
     }
 
     .nav-brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--text-primary);
-      cursor: pointer;
-    }
-
-    .nav-brand-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      background: var(--surface-elevated);
-      border: 1px solid var(--border-strong);
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--foreground);
     }
 
-    .nav-brand-icon img {
-      width: 22px;
-      height: 22px;
+    .nav-brand-img {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     }
 
-    .nav-brand-name {
+    .nav-brand-text {
       font-family: var(--font-display);
       font-weight: 700;
-      font-size: 18px;
+      font-size: 16px;
       letter-spacing: -0.02em;
     }
 
-    .nav-version {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--accent-cyan-bright);
-      background: rgba(6, 182, 212, 0.12);
-      border: 1px solid rgba(6, 182, 212, 0.28);
-      padding: 2px 8px;
-      border-radius: var(--radius-pill);
-    }
-
-    .nav-links {
+    .nav-menu {
       display: flex;
       align-items: center;
-      gap: 28px;
+      gap: 20px;
     }
 
-    .nav-link {
-      color: var(--text-secondary);
+    .nav-item {
+      color: var(--muted-foreground);
       text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: color 180ms ease;
-      cursor: pointer;
-    }
-
-    .nav-link:hover, .nav-link:focus-visible {
-      color: var(--text-primary);
-    }
-
-    .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 18px;
-      border-radius: var(--radius-pill);
-      background: var(--grad-primary);
-      color: #ffffff;
-      font-family: var(--font-display);
       font-size: 13.5px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
-      box-shadow: 0 4px 18px rgba(6, 182, 212, 0.35);
-      cursor: pointer;
+      font-weight: 500;
+      transition: color 150ms ease;
     }
 
-    .nav-cta:hover {
-      background: var(--grad-primary-hover);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(6, 182, 212, 0.5);
+    .nav-item:hover, .nav-item:focus-visible {
+      color: var(--foreground);
     }
 
-    /* Hero Section — Asymmetric Split */
-    .hero {
-      padding: 148px 0 96px;
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 56px;
-      align-items: center;
-    }
-
-    .eyebrow-pill {
-      display: inline-flex;
+    .nav-actions {
+      display: flex;
       align-items: center;
       gap: 10px;
-      padding: 6px 14px;
-      border-radius: var(--radius-pill);
-      background: rgba(99, 102, 241, 0.1);
-      border: 1px solid rgba(99, 102, 241, 0.3);
-      color: #c7d2fe;
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 24px;
     }
 
-    .pulse-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent-emerald);
-      box-shadow: 0 0 12px var(--accent-emerald);
-    }
-
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 5vw, 4.15rem);
-      font-weight: 700;
-      line-height: 1.07;
-      letter-spacing: -0.035em;
-      margin: 0 0 22px;
-    }
-
-    .gradient-span {
-      background: var(--grad-text);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero-lead {
-      font-size: 18px;
-      color: var(--text-secondary);
-      max-width: 58ch;
-      margin: 0 0 32px;
-      line-height: 1.65;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-bottom: 36px;
-    }
-
+    /* ------------------------------------------------------------- */
+    /* shadcn Button Primitives                                      */
+    /* ------------------------------------------------------------- */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      padding: 14px 26px;
-      border-radius: var(--radius-lg);
-      font-family: var(--font-display);
-      font-size: 15px;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 13.5px;
       font-weight: 600;
+      padding: 0 16px;
+      height: 38px;
+      border-radius: var(--radius-md);
       text-decoration: none;
-      border: 1px solid transparent;
-      transition: all 200ms var(--ease-out);
       cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 180ms var(--ease-out);
+      white-space: nowrap;
+      user-select: none;
     }
 
-    .btn-primary {
-      background: var(--grad-primary);
-      color: #ffffff;
-      box-shadow: 0 10px 30px -6px rgba(6, 182, 212, 0.45);
+    .btn:active {
+      transform: scale(0.98);
     }
 
-    .btn-primary:hover {
-      background: var(--grad-primary-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 14px 36px -6px rgba(6, 182, 212, 0.6);
+    .btn-default {
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+      box-shadow: 0 2px 10px rgba(255, 255, 255, 0.12);
+    }
+
+    .btn-default:hover {
+      background-color: #ffffff;
+      box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border-color: var(--border);
+      color: var(--foreground);
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(255, 255, 255, 0.04);
+      border-color: var(--muted-foreground);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary);
+      color: var(--secondary-foreground);
+      border-color: var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background-color: #323238;
     }
 
     .btn-ghost {
-      background: var(--surface-interactive);
-      border-color: var(--border-strong);
-      color: var(--text-primary);
+      background-color: transparent;
+      color: var(--muted-foreground);
     }
 
     .btn-ghost:hover {
-      background: var(--surface-interactive-hover);
-      border-color: var(--accent-cyan-bright);
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--foreground);
     }
 
-    .trust-strip {
+    .btn-sm {
+      height: 32px;
+      padding: 0 12px;
+      font-size: 12.5px;
+      border-radius: var(--radius-sm);
+    }
+
+    .btn-lg {
+      height: 44px;
+      padding: 0 22px;
+      font-size: 14.5px;
+      border-radius: var(--radius-lg);
+    }
+
+    /* ------------------------------------------------------------- */
+    /* shadcn Badge Primitives                                       */
+    /* ------------------------------------------------------------- */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border);
+      background-color: rgba(255, 255, 255, 0.03);
+      color: var(--muted-foreground);
+      line-height: 1;
+    }
+
+    .badge-primary {
+      background: rgba(59, 130, 246, 0.1);
+      border-color: rgba(59, 130, 246, 0.28);
+      color: #93c5fd;
+    }
+
+    .badge-success {
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.3);
+      color: #6ee7b7;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: currentColor;
+    }
+
+    .pulse-dot {
+      animation: pulse-ring 2s infinite ease-out;
+    }
+
+    @keyframes pulse-ring {
+      0% { opacity: 0.8; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.15); box-shadow: 0 0 8px currentColor; }
+      100% { opacity: 0.8; transform: scale(0.9); }
+    }
+
+    /* ------------------------------------------------------------- */
+    /* Section 1: Asymmetric Split Hero (Variance: 8, Density: 4)    */
+    /* ------------------------------------------------------------- */
+    .hero-section {
+      min-height: calc(100dvh - 52px);
+      display: flex;
+      align-items: center;
+      padding: 120px 0 72px;
+    }
+
+    .hero-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .hero-eyebrow {
+      margin-bottom: 20px;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.8vw, 3.85rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      color: var(--foreground);
+      margin-bottom: 20px;
+    }
+
+    .headline-accent {
+      color: #60a5fa;
+      display: inline-block;
+    }
+
+    .hero-description {
+      font-size: 16.5px;
+      color: var(--muted-foreground);
+      max-width: 54ch;
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    /* shadcn Command Copy Box */
+    .command-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 440px;
+      height: 42px;
+      padding: 0 8px 0 14px;
+      background: rgba(18, 18, 22, 0.7);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      color: var(--muted-foreground);
+      margin-bottom: 32px;
+      transition: border-color 150ms ease;
+    }
+
+    .command-box:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .command-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-sm);
+      background: var(--secondary);
+      border: 1px solid var(--border-subtle);
+      color: var(--foreground);
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .copy-btn:hover {
+      background: #35353d;
+      color: #ffffff;
+    }
+
+    /* Trust / Telemetry Stats */
+    .hero-stats {
+      width: 100%;
       display: grid;
       grid-template-columns: repeat(3, auto);
-      gap: 24px;
-      justify-content: start;
+      gap: 32px;
       padding-top: 24px;
-      border-top: 1px solid var(--border-hairline);
+      border-top: 1px solid var(--border-subtle);
     }
 
-    .trust-metric {
+    .stat-item {
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
 
-    .trust-val {
+    .stat-number {
       font-family: var(--font-mono);
       font-size: 18px;
       font-weight: 700;
-      color: var(--text-primary);
+      color: var(--foreground);
     }
 
-    .trust-label {
-      font-size: 12.5px;
-      color: var(--text-muted);
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted-foreground);
     }
 
-    /* Differentiation Anchor: Interactive OmniFlow HUD Simulator */
-    .hud-stage {
+    /* ------------------------------------------------------------- */
+    /* shadcn HUD Card (Interactive Simulator)                       */
+    /* ------------------------------------------------------------- */
+    .hud-card-wrapper {
       position: relative;
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      justify-content: center;
     }
 
-    .hud-halo {
+    .hud-card-glow {
       position: absolute;
-      inset: -24px;
-      background: radial-gradient(circle at 50% 40%, rgba(99, 102, 241, 0.28), rgba(6, 182, 212, 0.15) 55%, transparent 75%);
-      filter: blur(32px);
-      z-index: 0;
+      inset: -12px;
+      background: radial-gradient(circle at 60% 40%, rgba(59, 130, 246, 0.18), rgba(16, 185, 129, 0.08) 50%, transparent 75%);
+      filter: blur(36px);
       pointer-events: none;
+      z-index: 0;
     }
 
-    .hud-simulator {
+    .hud-card {
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 380px;
+      max-width: 400px;
       border-radius: var(--radius-2xl);
-      background: linear-gradient(180deg, rgba(16, 24, 46, 0.95) 0%, rgba(7, 11, 22, 0.98) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: 0 28px 64px -12px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.18);
-      padding: 20px;
+      background: linear-gradient(180deg, rgba(22, 22, 28, 0.94) 0%, rgba(13, 13, 16, 0.98) 100%);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 
+        0 24px 50px -12px rgba(0, 0, 0, 0.7), 
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      padding: 22px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
     }
 
-    .sim-top {
+    .hud-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
     }
 
-    .sim-brand {
+    .hud-title-wrap {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .sim-brand img.icon {
+    .hud-icon {
       width: 28px;
       height: 28px;
-      border-radius: 8px;
+      border-radius: 7px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     }
 
-    .sim-brand-title {
+    .hud-title {
       font-family: var(--font-display);
+      font-size: 15px;
       font-weight: 700;
-      font-size: 16px;
       letter-spacing: -0.01em;
     }
 
-    .sim-interactive-tag {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      padding: 3px 8px;
-      border-radius: var(--radius-pill);
-      background: rgba(6, 182, 212, 0.12);
-      border: 1px solid rgba(6, 182, 212, 0.3);
-      color: var(--accent-cyan-bright);
-    }
-
-    .sim-card {
-      background: rgba(9, 15, 30, 0.8);
-      border: 1px solid var(--border-hairline);
+    .hud-state-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
       padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
-    .sim-row-between {
+    .hud-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 8px;
     }
 
-    .sim-eyebrow {
+    .hud-label-xs {
       font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      color: var(--text-muted);
+      font-size: 10.5px;
+      color: var(--muted-foreground);
+      letter-spacing: 0.05em;
       text-transform: uppercase;
     }
 
-    .sim-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-mono);
-      font-size: 10.5px;
-      font-weight: 700;
-      padding: 2px 9px;
-      border-radius: var(--radius-pill);
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.35);
-      color: #34d399;
-    }
-
-    .sim-pill.is-off {
-      background: rgba(245, 158, 11, 0.12);
-      border-color: rgba(245, 158, 11, 0.35);
-      color: #fbbf24;
-    }
-
-    .sim-state-title {
+    .hud-state-title {
       font-family: var(--font-display);
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
-      margin: 0 0 4px;
+      margin-top: -4px;
     }
 
-    .sim-state-desc {
-      font-size: 12.5px;
-      color: var(--text-secondary);
-      margin: 0 0 14px;
+    .hud-state-desc {
+      font-size: 12px;
+      color: var(--muted-foreground);
+      line-height: 1.5;
     }
 
-    .sim-toggle-bar {
+    /* shadcn Switch Primitive */
+    .switch-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 10px 12px;
       border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border-hairline);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
     }
 
-    .sim-switch {
-      width: 46px;
-      height: 26px;
-      border-radius: var(--radius-pill);
-      background: var(--grad-primary);
+    .switch-label-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .switch-label-title {
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+
+    .switch-label-sub {
+      font-size: 11px;
+      color: var(--muted-foreground);
+    }
+
+    .shadcn-switch {
+      width: 44px;
+      height: 24px;
+      border-radius: var(--radius-full);
+      background-color: var(--accent-brand);
       border: none;
-      padding: 3px;
+      padding: 2px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      transition: background 180ms ease;
+      transition: background-color 180ms ease;
     }
 
-    .sim-switch[aria-checked="false"] {
-      background: rgba(100, 116, 139, 0.35);
+    .shadcn-switch[aria-checked="false"] {
+      background-color: var(--secondary);
       justify-content: flex-start;
     }
 
-    .sim-switch-thumb {
+    .shadcn-switch-thumb {
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      background: #ffffff;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     }
 
-    .sim-matrix {
+    .hud-telemetry-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
     }
 
-    .sim-cell {
-      padding: 10px;
+    .hud-metric-cell {
+      padding: 10px 12px;
       border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid var(--border-hairline);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
     }
 
-    .sim-cell-val {
+    .hud-metric-value {
       font-family: var(--font-mono);
       font-size: 12px;
       font-weight: 600;
-      color: var(--text-primary);
+      color: var(--foreground);
       margin-top: 2px;
     }
 
-    /* Section Headers */
-    .section {
+    /* ------------------------------------------------------------- */
+    /* Section 2: Bento Capabilities Grid (Vercel / shadcn Style)    */
+    /* ------------------------------------------------------------- */
+    .section-block {
       padding: 88px 0;
     }
 
     .section-header {
-      max-width: 680px;
-      margin: 0 auto 56px;
+      max-width: 640px;
+      margin: 0 auto 48px;
       text-align: center;
     }
 
-    .section-title {
+    .section-tag {
+      margin-bottom: 12px;
+    }
+
+    .section-h2 {
       font-family: var(--font-display);
-      font-size: clamp(1.85rem, 3.5vw, 2.75rem);
+      font-size: clamp(1.85rem, 3.2vw, 2.5rem);
       font-weight: 700;
-      letter-spacing: -0.025em;
-      margin: 0 0 14px;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 12px;
     }
 
-    .section-sub {
-      color: var(--text-secondary);
-      font-size: 17px;
-      margin: 0;
+    .section-p {
+      color: var(--muted-foreground);
+      font-size: 16px;
     }
 
-    /* Bento Grid (Features & Before/After) */
-    .bento-grid {
+    .bento-grid-container {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      gap: 20px;
+      gap: 16px;
     }
 
-    .bento-card {
-      grid-column: span 6;
-      background: var(--surface-glass);
-      border: 1px solid var(--border-hairline);
+    /* shadcn Card Container */
+    .shadcn-card {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-xl);
-      padding: 32px;
+      padding: 28px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
       transition: border-color 200ms ease, transform 200ms var(--ease-out);
     }
 
-    .bento-card:hover {
-      border-color: var(--border-cyan);
+    .shadcn-card:hover {
+      border-color: rgba(255, 255, 255, 0.18);
       transform: translateY(-2px);
     }
 
-    .bento-card.span-7 { grid-column: span 7; }
-    .bento-card.span-5 { grid-column: span 5; }
+    .col-span-7 { grid-column: span 7; }
+    .col-span-5 { grid-column: span 5; }
+    .col-span-4 { grid-column: span 4; }
+    .col-span-8 { grid-column: span 8; }
+    .col-span-12 { grid-column: span 12; }
 
-    .card-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: rgba(6, 182, 212, 0.1);
-      border: 1px solid rgba(6, 182, 212, 0.25);
-      color: var(--accent-cyan-bright);
+    .card-icon-box {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: #93c5fd;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 20px;
     }
 
-    .bento-title {
+    .card-h3 {
       font-family: var(--font-display);
-      font-size: 21px;
+      font-size: 19px;
       font-weight: 700;
-      margin: 0 0 10px;
+      letter-spacing: -0.015em;
+      margin-bottom: 10px;
+      color: var(--foreground);
     }
 
-    .bento-desc {
-      color: var(--text-secondary);
-      font-size: 15px;
-      margin: 0;
+    .card-p {
+      color: var(--muted-foreground);
+      font-size: 14.5px;
       line-height: 1.6;
     }
 
-    /* 3-Step Pipeline */
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .step-box {
-      background: var(--surface-glass);
-      border: 1px solid var(--border-hairline);
-      border-radius: var(--radius-xl);
-      padding: 28px;
-      position: relative;
-    }
-
-    .step-number {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--accent-cyan-bright);
-      background: rgba(6, 182, 212, 0.1);
-      border: 1px solid rgba(6, 182, 212, 0.25);
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      display: inline-block;
-      margin-bottom: 16px;
-    }
-
-    /* Access Tiers / Pricing */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      align-items: stretch;
-    }
-
-    .price-card {
-      background: var(--surface-glass);
-      border: 1px solid var(--border-hairline);
-      border-radius: var(--radius-xl);
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .price-card.featured {
-      background: linear-gradient(180deg, rgba(24, 34, 68, 0.92) 0%, rgba(11, 17, 34, 0.96) 100%);
-      border: 2px solid var(--accent-indigo);
-      box-shadow: 0 20px 50px -12px rgba(99, 102, 241, 0.35);
-    }
-
-    .price-name {
-      font-family: var(--font-display);
-      font-size: 20px;
-      font-weight: 700;
-      margin: 0 0 6px;
-    }
-
-    .price-amount {
-      font-family: var(--font-display);
-      font-size: 36px;
-      font-weight: 700;
-      margin: 16px 0;
-    }
-
-    .price-features {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 28px;
+    /* Visual Telemetry Widget inside Bento Card */
+    .flow-compare-widget {
+      margin-top: 24px;
+      padding: 16px;
+      border-radius: var(--radius-md);
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-subtle);
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
-    .price-features li {
+    .compare-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .progress-fill-vpn {
+      width: 18%;
+      height: 100%;
+      background: #ef4444;
+      border-radius: var(--radius-full);
+    }
+
+    .progress-fill-omniflow {
+      width: 100%;
+      height: 100%;
+      background: var(--accent-emerald);
+      border-radius: var(--radius-full);
+    }
+
+    /* ------------------------------------------------------------- */
+    /* Section 3: Interactive Tabs Installation Workflow             */
+    /* ------------------------------------------------------------- */
+    .tabs-wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .tabs-list {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      margin-bottom: 24px;
+      justify-content: center;
+    }
+
+    .tabs-trigger {
+      padding: 8px 18px;
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 600;
+      border: none;
+      background: transparent;
+      color: var(--muted-foreground);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .tabs-trigger.is-active {
+      background: var(--secondary);
+      color: var(--foreground);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .steps-stack {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .step-card {
+      background: var(--card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .step-index-badge {
+      align-self: flex-start;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #93c5fd;
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .step-body {
+      font-size: 13.5px;
+      color: var(--muted-foreground);
+      line-height: 1.55;
+    }
+
+    .step-body code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 2px 5px;
+      border-radius: 4px;
+      color: #e2e8f0;
+    }
+
+    /* ------------------------------------------------------------- */
+    /* Section 4: Access Tiers & Licenses                            */
+    /* ------------------------------------------------------------- */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .price-card {
+      background: var(--card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+      transition: all 180ms ease;
+    }
+
+    .price-card.featured-card {
+      border: 1px solid var(--border-highlight);
+      background: linear-gradient(180deg, rgba(24, 30, 48, 0.75) 0%, rgba(14, 16, 24, 0.9) 100%);
+      box-shadow: 0 16px 40px -10px rgba(59, 130, 246, 0.25);
+    }
+
+    .price-card-header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .price-tier-name {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .price-tier-sub {
+      font-size: 13px;
+      color: var(--muted-foreground);
+    }
+
+    .price-tag {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--foreground);
+      margin: 12px 0 4px;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .feature-item {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 14.5px;
-      color: var(--text-secondary);
+      font-size: 13.5px;
+      color: #d4d4d8;
     }
 
-    .check-svg {
+    .feature-check {
       color: var(--accent-emerald);
       flex-shrink: 0;
     }
 
-    /* FAQ Accordion */
-    .faq-list {
-      max-width: 780px;
+    /* ------------------------------------------------------------- */
+    /* Section 5: shadcn Collapsible FAQ                             */
+    /* ------------------------------------------------------------- */
+    .faq-container {
+      max-width: 760px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 10px;
     }
 
     .faq-item {
-      background: var(--surface-glass);
-      border: 1px solid var(--border-hairline);
+      background: var(--card);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
       overflow: hidden;
+      transition: border-color 150ms ease;
     }
 
-    .faq-item summary {
-      padding: 20px 24px;
+    .faq-item[open] {
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .faq-summary {
+      padding: 18px 20px;
       font-family: var(--font-display);
-      font-size: 17px;
+      font-size: 15.5px;
       font-weight: 600;
       cursor: pointer;
       list-style: none;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      user-select: none;
     }
 
-    .faq-item summary::-webkit-details-marker {
+    .faq-summary::-webkit-details-marker {
       display: none;
     }
 
-    .faq-answer {
-      padding: 0 24px 20px;
-      color: var(--text-secondary);
-      font-size: 15px;
-      line-height: 1.65;
+    .faq-chevron {
+      color: var(--muted-foreground);
+      transition: transform 180ms ease;
     }
 
-    /* Footer */
+    .faq-item[open] .faq-chevron {
+      transform: rotate(180deg);
+      color: var(--foreground);
+    }
+
+    .faq-body {
+      padding: 0 20px 18px;
+      color: var(--muted-foreground);
+      font-size: 14.5px;
+      line-height: 1.6;
+    }
+
+    /* ------------------------------------------------------------- */
+    /* shadcn Footer                                                 */
+    /* ------------------------------------------------------------- */
     .site-footer {
+      border-top: 1px solid var(--border-subtle);
+      margin-top: 80px;
       padding: 48px 0;
-      border-top: 1px solid var(--border-hairline);
-      margin-top: 64px;
+    }
+
+    .footer-inner {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      color: var(--text-muted);
-      font-size: 14px;
+      flex-wrap: wrap;
+      gap: 20px;
     }
 
-    /* Accessibility & Responsive */
+    .footer-brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-slogan {
+      font-size: 13px;
+      color: var(--muted-foreground);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-link {
+      font-size: 13px;
+      color: var(--muted-foreground);
+      text-decoration: none;
+      transition: color 150ms ease;
+    }
+
+    .footer-link:hover {
+      color: var(--foreground);
+    }
+
+    /* ------------------------------------------------------------- */
+    /* Focus & Accessibility State                                   */
+    /* ------------------------------------------------------------- */
     a:focus-visible, button:focus-visible, summary:focus-visible {
-      outline: 2px solid var(--accent-cyan-bright);
+      outline: 2px solid var(--ring);
       outline-offset: 3px;
     }
 
+    /* ------------------------------------------------------------- */
+    /* Mobile Collapse Guard (Breakpoints: < 960px & < 768px)        */
+    /* ------------------------------------------------------------- */
     @media (max-width: 960px) {
-      .hero {
+      .hero-grid {
         grid-template-columns: 1fr;
-        padding-top: 124px;
+        gap: 40px;
+      }
+      .hero-content {
+        align-items: center;
         text-align: center;
       }
-      .hero-lead { margin-left: auto; margin-right: auto; }
-      .hero-actions { justify-content: center; }
-      .trust-strip { justify-content: center; }
-      .bento-card, .bento-card.span-7, .bento-card.span-5 { grid-column: span 12; }
-      .steps-grid, .pricing-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+      .hero-cta-group {
+        justify-content: center;
+      }
+      .command-box {
+        margin: 0 auto 32px;
+      }
+      .hero-stats {
+        justify-content: center;
+      }
+      .col-span-7, .col-span-5, .col-span-4, .col-span-8 {
+        grid-column: span 12;
+      }
+      .steps-stack, .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-menu {
+        display: none;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -843,374 +1167,560 @@
   </style>
 </head>
 <body>
-  <div class="orbital-backdrop" aria-hidden="true"></div>
-  <div class="orbital-grid" aria-hidden="true"></div>
+  <!-- Atmospheric Mesh & Background Grid -->
+  <div class="bg-mesh-container" aria-hidden="true">
+    <div class="bg-gradient-top"></div>
+    <div class="bg-grid-overlay"></div>
+  </div>
 
-  <!-- Floating Navigation -->
-  <div class="nav-wrapper">
-    <nav class="navbar" aria-label="Primary Navigation">
-      <a href="#" class="nav-brand">
-        <span class="nav-brand-icon" style="background: transparent; border: none; padding: 0;">
-          <img src="assets/icon-48.png" alt="OmniFlow Icon" width="28" height="28" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(6, 182, 212, 0.35);" />
-        </span>
-        <span class="nav-brand-name">OmniFlow</span>
-        <span class="nav-version">v1.0.0</span>
-      </a>
-
-      <div class="nav-links">
-        <a href="#features" class="nav-link">Capabilities</a>
-        <a href="#how-it-works" class="nav-link">Installation</a>
-        <a href="#access-tiers" class="nav-link">Access Passes</a>
-        <a href="#faq" class="nav-link">FAQ</a>
+  <!-- Floating shadcn Navbar -->
+  <div class="nav-anchor">
+    <nav class="nav-bar" aria-label="Primary Navigation">
+      <div class="nav-left">
+        <a href="#" class="nav-brand">
+          <img src="assets/icon-48.png" alt="OmniFlow Logo" class="nav-brand-img" width="26" height="26" />
+          <span class="nav-brand-text">OmniFlow</span>
+          <span class="badge badge-primary">v1.0.0</span>
+        </a>
+        <div class="nav-menu">
+          <a href="#features" class="nav-item">Capabilities</a>
+          <a href="#installation" class="nav-item">Installation</a>
+          <a href="#passes" class="nav-item">Access Passes</a>
+          <a href="#faq" class="nav-item">FAQ</a>
+        </div>
       </div>
 
-      <a href="https://github.com/angelolockdev/omniflow" target="_blank" rel="noopener noreferrer" class="nav-cta">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-          <polyline points="7 10 12 15 17 10"></polyline>
-          <line x1="12" y1="15" x2="12" y2="3"></line>
-        </svg>
-        <span>Get OmniFlow</span>
-      </a>
+      <div class="nav-actions">
+        <a href="https://github.com/angelolockdev/omniflow" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+          <span>GitHub</span>
+        </a>
+        <a href="https://github.com/angelolockdev/omniflow/archive/refs/heads/main.zip" class="btn btn-default btn-sm">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Download</span>
+        </a>
+      </div>
     </nav>
   </div>
 
-  <main class="container">
-    <!-- Asymmetric Split Hero -->
-    <section class="hero">
-      <div>
-        <div class="eyebrow-pill">
-          <span class="pulse-dot" aria-hidden="true"></span>
-          <span>MANIFEST V3 • ZERO VPN LATENCY</span>
-        </div>
-
-        <h1 class="hero-title">
-          Unlock Google Flow anywhere.<br />
-          <span class="gradient-span">Zero bandwidth bottlenecks.</span>
-        </h1>
-
-        <p class="hero-lead">
-          Stop routing gigabytes of AI video generations through sluggish VPN tunnels or changing your primary Google account country. <strong>OmniFlow</strong> adapts regional availability checks directly inside your browser in sub-millisecond time.
-        </p>
-
-        <div class="hero-actions">
-          <a href="https://github.com/angelolockdev/omniflow/archive/refs/heads/main.zip" class="btn btn-primary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            <span>Download Extension (ZIP)</span>
-          </a>
-          <a href="https://github.com/angelolockdev/omniflow" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
-            <span>View on GitHub →</span>
-          </a>
-        </div>
-
-        <div class="trust-strip">
-          <div class="trust-metric">
-            <span class="trust-val">&lt; 1 ms</span>
-            <span class="trust-label">In-Memory Overhead</span>
+  <main class="site-container">
+    <!-- Asymmetric Split Hero Section -->
+    <section class="hero-section">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-eyebrow">
+            <span class="badge badge-success">
+              <span class="badge-dot pulse-dot" aria-hidden="true"></span>
+              <span>MANIFEST V3 &bull; ZERO VPN LATENCY</span>
+            </span>
           </div>
-          <div class="trust-metric">
-            <span class="trust-val">100%</span>
-            <span class="trust-label">Native ISP Speed</span>
-          </div>
-          <div class="trust-metric">
-            <span class="trust-val">Chromium</span>
-            <span class="trust-label">Chrome, Brave, Edge, Arc</span>
-          </div>
-        </div>
-      </div>
 
-      <!-- Interactive HUD Simulator (Differentiation Anchor) -->
-      <div class="hud-stage">
-        <div class="hud-halo" aria-hidden="true"></div>
-        <div class="hud-simulator" role="region" aria-label="Interactive OmniFlow HUD Preview">
-          <div class="sim-top">
-            <div class="sim-brand">
-              <img class="icon" src="assets/icon.png" alt="OmniFlow" width="28" height="28" />
-              <span class="sim-brand-title">OmniFlow HUD</span>
+          <h1 class="hero-headline">
+            Unlock Google Flow.<br />
+            <span class="headline-accent">Stream at native speed.</span>
+          </h1>
+
+          <p class="hero-description">
+            Eliminate artificial geo-fencing bottlenecks without rerouting high-bitrate video streams through lagging VPN proxies or altering your primary Google account country.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="https://github.com/angelolockdev/omniflow/archive/refs/heads/main.zip" class="btn btn-default btn-lg">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Download Extension (ZIP)</span>
+            </a>
+            <a href="#installation" class="btn btn-outline btn-lg">
+              <span>Installation Guide &rarr;</span>
+            </a>
+          </div>
+
+          <!-- Command Box with Click-to-Copy -->
+          <div class="command-box">
+            <span class="command-text" id="cmd-text">git clone https://github.com/angelolockdev/omniflow.git</span>
+            <button class="copy-btn" id="btn-copy-cmd" type="button" title="Copy clone command" aria-label="Copy clone command">
+              <svg id="copy-icon-idle" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <svg id="copy-icon-success" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: none; color: #10b981;">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Technical Metrics Strip -->
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number">&lt; 1 ms</span>
+              <span class="stat-label">In-Memory Overhead</span>
             </div>
-            <span class="sim-interactive-tag">INTERACTIVE PREVIEW</span>
-          </div>
-
-          <div class="sim-card">
-            <div class="sim-row-between">
-              <span class="sim-eyebrow">ENGINE STATE</span>
-              <span id="sim-pill" class="sim-pill">ACTIVE</span>
+            <div class="stat-item">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Native Gigabit Throughput</span>
             </div>
-            <h2 id="sim-title" class="sim-state-title">Protection Active</h2>
-            <p id="sim-desc" class="sim-state-desc">OmniFlow is active on this tab — region check adapted.</p>
+            <div class="stat-item">
+              <span class="stat-number">4 Browsers</span>
+              <span class="stat-label">Chrome, Brave, Edge, Arc</span>
+            </div>
+          </div>
+        </div>
 
-            <div class="sim-toggle-bar">
-              <div>
-                <div style="font-size: 13px; font-weight: 600;">Protection Engine</div>
-                <div style="font-size: 11px; color: var(--text-muted);">Click switch to test HUD state</div>
+        <!-- Interactive HUD Simulator (shadcn Component) -->
+        <div class="hud-card-wrapper">
+          <div class="hud-card-glow" aria-hidden="true"></div>
+          <div class="hud-card" role="region" aria-label="Interactive OmniFlow HUD Simulator">
+            <div class="hud-header">
+              <div class="hud-title-wrap">
+                <img src="assets/icon.png" alt="OmniFlow Squircle" class="hud-icon" width="28" height="28" />
+                <span class="hud-title">OmniFlow Engine</span>
               </div>
-              <button id="sim-toggle" class="sim-switch" type="button" role="switch" aria-checked="true" aria-label="Toggle simulated protection engine">
-                <span class="sim-switch-thumb"></span>
-              </button>
+              <span class="badge badge-primary">LIVE SIMULATOR</span>
             </div>
-          </div>
 
-          <div class="sim-matrix">
-            <div class="sim-cell">
-              <div class="sim-eyebrow">TARGET GATEWAY</div>
-              <div class="sim-cell-val">flow.google.com</div>
+            <div class="hud-state-box">
+              <div class="hud-row">
+                <span class="hud-label-xs">STATUS</span>
+                <span id="hud-status-badge" class="badge badge-success">ACTIVE &bull; READY</span>
+              </div>
+              <div id="hud-status-title" class="hud-state-title">Regional Protection Active</div>
+              <p id="hud-status-desc" class="hud-state-desc">
+                Eligible parameter in-flight injection active for Google Flow. Direct CDN streaming armed.
+              </p>
+
+              <!-- Interactive Switch -->
+              <div class="switch-row">
+                <div class="switch-label-group">
+                  <span class="switch-label-title">Bypass Engine</span>
+                  <span class="switch-label-sub">Toggle client-side adaptation</span>
+                </div>
+                <button id="hud-switch" class="shadcn-switch" type="button" role="switch" aria-checked="true" aria-label="Toggle OmniFlow Engine">
+                  <span class="shadcn-switch-thumb"></span>
+                </button>
+              </div>
             </div>
-            <div class="sim-cell">
-              <div class="sim-eyebrow">INTERCEPTOR</div>
-              <div id="sim-interceptor" class="sim-cell-val" style="color: #34d399;">Active &amp; Patched</div>
+
+            <div class="hud-telemetry-grid">
+              <div class="hud-metric-cell">
+                <div class="hud-label-xs">TARGET ORIGIN</div>
+                <div class="hud-metric-value">flow.google.com</div>
+              </div>
+              <div class="hud-metric-cell">
+                <div class="hud-label-xs">INTERCEPTOR</div>
+                <div id="hud-interceptor-state" class="hud-metric-value" style="color: #6ee7b7;">Document Start</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Bento Capabilities Grid -->
-    <section id="features" class="section">
+    <!-- Section 2: Bento 2.0 Capabilities Grid -->
+    <section id="features" class="section-block">
       <div class="section-header">
-        <h2 class="section-title">Engineered for zero-friction creative workflows</h2>
-        <p class="section-sub">Traditional VPNs throttle high-bitrate video generation streams. OmniFlow eliminates the bottleneck entirely.</p>
+        <div class="section-tag">
+          <span class="badge">CAPABILITIES</span>
+        </div>
+        <h2 class="section-h2">Architected for frictionless generative workflows</h2>
+        <p class="section-p">Say goodbye to slow VPN tunnels that degrade video generation previews.</p>
       </div>
 
-      <div class="bento-grid">
-        <article class="bento-card span-7">
-          <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-            </svg>
+      <div class="bento-grid-container">
+        <!-- Feature 1: Gigabit CDN Streaming -->
+        <article class="shadcn-card col-span-7">
+          <div>
+            <div class="card-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <h3 class="card-h3">Direct Gigabit CDN Streaming — Zero Relays</h3>
+            <p class="card-p">
+              OmniFlow never routes your generation packets through third-party servers. Video streams, render assets, and previews download directly from Google servers over your high-speed ISP link.
+            </p>
           </div>
-          <h3 class="bento-title">Direct Gigabit Streaming — Zero Proxy Relays</h3>
-          <p class="bento-desc">
-            OmniFlow never tunnels your network traffic through external proxy servers. Once the initial region handshake is adapted in memory, all AI video renders and asset downloads stream straight from Google’s edge CDN to your browser.
-          </p>
+
+          <div class="flow-compare-widget">
+            <div class="compare-bar">
+              <span style="color: #f87171;">VPN Tunnel (Throttled)</span>
+              <span>~ 18 MB/s</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill-vpn"></div>
+            </div>
+            <div class="compare-bar" style="margin-top: 4px;">
+              <span style="color: #6ee7b7;">OmniFlow Native CDN</span>
+              <span>~ 112 MB/s (Direct)</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill-omniflow"></div>
+            </div>
+          </div>
         </article>
 
-        <article class="bento-card span-5">
-          <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
+        <!-- Feature 2: Google Account Safe -->
+        <article class="shadcn-card col-span-5">
+          <div>
+            <div class="card-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h3 class="card-h3">Account &amp; Billing Safe</h3>
+            <p class="card-p">
+              Keep your existing Google Workspace, localized YouTube Premium, and payment methods untouched. OmniFlow acts entirely inside the DOM runtime without altering your account country.
+            </p>
           </div>
-          <h3 class="bento-title">Google Account Safe</h3>
-          <p class="bento-desc">
-            Keep your existing Google Workspace, Play Store country, and payment profiles untouched. No risky account-wide region migrations required.
-          </p>
+          <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between;">
+            <span class="badge badge-success">Zero Profile Migration</span>
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--muted-foreground);">Risk: 0.00%</span>
+          </div>
         </article>
 
-        <article class="bento-card span-5">
-          <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-              <line x1="8" y1="21" x2="16" y2="21"></line>
-              <line x1="12" y1="17" x2="12" y2="21"></line>
-            </svg>
+        <!-- Feature 3: Document Start Precision -->
+        <article class="shadcn-card col-span-5">
+          <div>
+            <div class="card-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <h3 class="card-h3">Document-Start Precision</h3>
+            <p class="card-p">
+              Built on Chromium Manifest V3 <code>chrome.scripting</code> standards, OmniFlow executes before page scripts initialize, preventing redirect loops to unsupported country pages.
+            </p>
           </div>
-          <h3 class="bento-title">Live Diagnostic Matrix</h3>
-          <p class="bento-desc">
-            Verify engine readiness at a glance with real-time states (<code>ACTIVE</code>, <code>READY</code>, <code>RELOAD</code>) directly from your browser toolbar.
-          </p>
         </article>
 
-        <article class="bento-card span-7">
-          <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="10"></circle>
-              <polyline points="12 6 12 12 16 14"></polyline>
-            </svg>
+        <!-- Feature 4: Shielded Multi-Tenant Gateway -->
+        <article class="shadcn-card col-span-7">
+          <div>
+            <div class="card-icon-box">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <h3 class="card-h3">Shielded Serverless License Gateway</h3>
+            <p class="card-p">
+              Access passes are verified through an enterprise API gateway on Vercel with zero database credentials exposed in public code. Real-time device binding quota management included.
+            </p>
           </div>
-          <h3 class="bento-title">Document-Start Precision</h3>
-          <p class="bento-desc">
-            Built on Chromium’s native Manifest V3 <code>chrome.scripting</code> API, OmniFlow arms before page scripts initialize so <code>/unsupported-country</code> redirects never trigger.
-          </p>
+          <div style="margin-top: 20px; display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="badge">Hardware Device Quota</span>
+            <span class="badge">Per-Tenant Scoping</span>
+            <span class="badge">Instant Revocation</span>
+          </div>
         </article>
       </div>
     </section>
 
-    <!-- 3-Step Installation -->
-    <section id="how-it-works" class="section">
+    <!-- Section 3: Interactive Tabs Installation -->
+    <section id="installation" class="section-block">
       <div class="section-header">
-        <h2 class="section-title">Up and running in 60 seconds</h2>
-        <p class="section-sub">No command-line compilers or external dependencies required.</p>
+        <div class="section-tag">
+          <span class="badge">QUICKSTART</span>
+        </div>
+        <h2 class="section-h2">Installed and ready in 60 seconds</h2>
+        <p class="section-p">No build dependencies or external compilers required.</p>
       </div>
 
-      <div class="steps-grid">
-        <div class="step-box">
-          <span class="step-number">STEP 01</span>
-          <h3 class="bento-title">Download &amp; Extract</h3>
-          <p class="bento-desc">Download the latest OmniFlow release archive from GitHub and extract the folder to your computer.</p>
+      <div class="tabs-wrapper">
+        <div class="tabs-list" role="tablist">
+          <button class="tabs-trigger is-active" data-tab="chrome" type="button" role="tab" aria-selected="true">Google Chrome</button>
+          <button class="tabs-trigger" data-tab="brave" type="button" role="tab" aria-selected="false">Brave Browser</button>
+          <button class="tabs-trigger" data-tab="edge" type="button" role="tab" aria-selected="false">Microsoft Edge</button>
+          <button class="tabs-trigger" data-tab="arc" type="button" role="tab" aria-selected="false">Arc Browser</button>
         </div>
-        <div class="step-box">
-          <span class="step-number">STEP 02</span>
-          <h3 class="bento-title">Load Unpacked</h3>
-          <p class="bento-desc">Open <code>chrome://extensions</code>, enable <strong>Developer mode</strong>, and click <strong>Load unpacked</strong> to select the OmniFlow folder.</p>
-        </div>
-        <div class="step-box">
-          <span class="step-number">STEP 03</span>
-          <h3 class="bento-title">Activate &amp; Launch</h3>
-          <p class="bento-desc">Open the OmniFlow popup, activate your access pass, and click <strong>Open Flow</strong> to start creating immediately.</p>
+
+        <div class="steps-stack">
+          <div class="step-card">
+            <span class="step-index-badge">STEP 01</span>
+            <h3 class="step-title">Download &amp; Extract</h3>
+            <p class="step-body">
+              Download the official OmniFlow ZIP archive from GitHub and extract the archive folder to your local storage.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <span class="step-index-badge">STEP 02</span>
+            <h3 class="step-title">Load Unpacked</h3>
+            <p class="step-body" id="tab-instruction-text">
+              Open <code>chrome://extensions</code> in your browser, switch on <strong>Developer mode</strong>, and click <strong>Load unpacked</strong>.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <span class="step-index-badge">STEP 03</span>
+            <h3 class="step-title">Activate Pass</h3>
+            <p class="step-body">
+              Click the OmniFlow squircle icon in your browser toolbar, enter your personal access pass, and start generating on Google Flow.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Access Tiers -->
-    <section id="access-tiers" class="section">
+    <!-- Section 4: Access Tiers (shadcn Cards) -->
+    <section id="passes" class="section-block">
       <div class="section-header">
-        <h2 class="section-title">Flexible Access Passes</h2>
-        <p class="section-sub">Instant activation keys tailored for solo creators and production studios.</p>
+        <div class="section-tag">
+          <span class="badge">ACCESS PASSES</span>
+        </div>
+        <h2 class="section-h2">Dedicated passes for creators and studios</h2>
+        <p class="section-p">Instant license keys with multi-device hardware management.</p>
       </div>
 
       <div class="pricing-grid">
+        <!-- Tier 1: Creator -->
         <div class="price-card">
-          <div>
-            <h3 class="price-name">Standard Pass</h3>
-            <p class="bento-desc">Ideal for individual exploration and short-term projects.</p>
-            <div class="price-amount">30 Days</div>
-            <ul class="price-features">
-              <li>
-                <svg class="check-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>1 Activated Browser Device</span>
-              </li>
-              <li>
-                <svg class="check-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Full Google Flow Region Unlock</span>
-              </li>
-              <li>
-                <svg class="check-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Automatic Spec Updates</span>
-              </li>
-            </ul>
+          <div class="price-card-header">
+            <span class="price-tier-name">Individual Pass</span>
+            <span class="price-tier-sub">Solo creators and testing workflows</span>
+            <div class="price-tag">30 Days</div>
           </div>
-          <a href="https://github.com/angelolockdev/omniflow" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Get Standard Pass</a>
+
+          <ul class="feature-list">
+            <li class="feature-item">
+              <svg class="feature-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>1 Bound Browser Workstation</span>
+            </li>
+            <li class="feature-item">
+              <svg class="feature-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Sub-Millisecond In-Memory Engine</span>
+            </li>
+            <li class="feature-item">
+              <svg class="feature-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Automatic Gateway Updates</span>
+            </li>
+          </ul>
+
+          <a href="https://github.com/angelolockdev/omniflow" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <span>Get Standard Pass</span>
+          </a>
         </div>
 
-        <div class="price-card featured">
-          <div>
-            <h3 class="price-name">VIP Creator</h3>
-            <p class="bento-desc">Built for daily AI filmmakers and multi-device workflows.</p>
-            <div class="price-amount">365 Days</div>
-            <ul class="price-features">
-              <li>
-                <svg class="check-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Up to 2 Concurrent Devices</span>
-              </li>
-              <li>
-                <svg class="check-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Zero-Latency In-Memory Engine</span>
-              </li>
-              <li>
-                <svg class="check-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Priority Schema Compatibility</span>
-              </li>
-            </ul>
+        <!-- Tier 2: VIP Creator (Featured) -->
+        <div class="price-card featured-card">
+          <div class="price-card-header">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="price-tier-name">VIP Pro Pass</span>
+              <span class="badge badge-primary">POPULAR</span>
+            </div>
+            <span class="price-tier-sub">Daily AI video directors &amp; filmmakers</span>
+            <div class="price-tag">365 Days</div>
           </div>
-          <a href="https://github.com/angelolockdev/omniflow" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Download &amp; Activate</a>
+
+          <ul class="feature-list">
+            <li class="feature-item">
+              <svg class="feature-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Up to 2 Concurrent Workstations</span>
+            </li>
+            <li class="feature-item">
+              <svg class="feature-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Multi-Tenant High Priority Routing</span>
+            </li>
+            <li class="feature-item">
+              <svg class="feature-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Zero-Latency Stream Preservation</span>
+            </li>
+            <li class="feature-item">
+              <svg class="feature-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Hardware Device Reset Protection</span>
+            </li>
+          </ul>
+
+          <a href="https://github.com/angelolockdev/omniflow" target="_blank" rel="noopener noreferrer" class="btn btn-default">
+            <span>Activate VIP Pro</span>
+          </a>
         </div>
 
+        <!-- Tier 3: Studio -->
         <div class="price-card">
-          <div>
-            <h3 class="price-name">Studio Master</h3>
-            <p class="bento-desc">For creative teams managing multiple workstations.</p>
-            <div class="price-amount">Lifetime</div>
-            <ul class="price-features">
-              <li>
-                <svg class="check-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Up to 10 Workstations</span>
-              </li>
-              <li>
-                <svg class="check-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Unlimited Duration</span>
-              </li>
-              <li>
-                <svg class="check-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Direct Repository Releases</span>
-              </li>
-            </ul>
+          <div class="price-card-header">
+            <span class="price-tier-name">Studio Master</span>
+            <span class="price-tier-sub">Multi-seat design and agency teams</span>
+            <div class="price-tag">Lifetime</div>
           </div>
-          <a href="https://github.com/angelolockdev/omniflow" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Contact Studio</a>
+
+          <ul class="feature-list">
+            <li class="feature-item">
+              <svg class="feature-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Up to 10 Workstations</span>
+            </li>
+            <li class="feature-item">
+              <svg class="feature-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Custom Tenant Organization Tag</span>
+            </li>
+            <li class="feature-item">
+              <svg class="feature-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Permanent Non-Expiring Keys</span>
+            </li>
+          </ul>
+
+          <a href="https://github.com/angelolockdev/omniflow" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <span>Contact Studio</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="section">
+    <!-- Section 5: shadcn Accordion FAQ -->
+    <section id="faq" class="section-block">
       <div class="section-header">
-        <h2 class="section-title">Frequently Asked Questions</h2>
-        <p class="section-sub">Everything you need to know about OmniFlow.</p>
+        <div class="section-tag">
+          <span class="badge">FAQ</span>
+        </div>
+        <h2 class="section-h2">Frequently Asked Questions</h2>
+        <p class="section-p">Essential information about OmniFlow architecture and security.</p>
       </div>
 
-      <div class="faq-list">
+      <div class="faq-container">
         <details class="faq-item" open>
-          <summary>
-            <span>Does OmniFlow route my traffic through a proxy or VPN?</span>
-            <span>+</span>
+          <summary class="faq-summary">
+            <span>Does OmniFlow route my traffic through third-party servers?</span>
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
           </summary>
-          <div class="faq-answer">
-            No. OmniFlow operates inside your browser sandbox. Your video streams and creative assets load directly from Google servers at 100% of your native internet speed.
+          <div class="faq-body">
+            No. OmniFlow operates purely inside your local browser runtime. All video downloads, previews, and prompt requests connect straight from Google's edge data centers to your machine.
           </div>
         </details>
 
         <details class="faq-item">
-          <summary>
-            <span>Do I need to change my Google Account country or payment profile?</span>
-            <span>+</span>
+          <summary class="faq-summary">
+            <span>Do I need to modify my Google account region or currency?</span>
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
           </summary>
-          <div class="faq-answer">
-            Never. OmniFlow adapts regional eligibility checks in-memory before the page router redirects, leaving your Google account settings and payment profiles untouched.
+          <div class="faq-body">
+            Never. OmniFlow handles regional parameters in-memory before the router redirects, leaving your Google Workspace, billing, and Play Store profiles untouched.
           </div>
         </details>
 
         <details class="faq-item">
-          <summary>
-            <span>Which browsers are supported?</span>
-            <span>+</span>
+          <summary class="faq-summary">
+            <span>Which browsers are compatible?</span>
+            <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
           </summary>
-          <div class="faq-answer">
-            Any Chromium-based browser supporting Manifest V3 (version 111+): Google Chrome, Brave, Microsoft Edge, Arc, Opera, and Vivaldi.
+          <div class="faq-body">
+            Any Chromium-based browser supporting Manifest V3: Google Chrome, Brave Browser, Microsoft Edge, Arc Browser, and Opera.
           </div>
         </details>
       </div>
     </section>
 
-    <footer class="site-footer" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; padding: 48px 24px;">
-      <img src="assets/logo-dark.png" alt="OmniFlow — Automatisez • Connectez • Accélérez" height="32" style="width: auto; opacity: 0.95;" />
-      <div style="font-size: 13px; color: var(--text-muted); font-family: var(--font-body);">
-        Automatisez &bull; Connectez &bull; Acc&eacute;l&eacute;rez &mdash; Engine multi-tenant et d&eacute;blocage r&eacute;gional intelligent
-      </div>
-      <div style="margin-top: 6px;">
-        <a href="https://github.com/angelolockdev/omniflow" target="_blank" rel="noopener noreferrer" class="nav-link" style="font-size: 13px;">GitHub Repository</a>
+    <!-- shadcn Minimal Footer -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand-wrap">
+          <img src="assets/logo-dark.png" alt="OmniFlow Logo" height="26" style="width: auto; opacity: 0.9;" />
+          <span class="footer-slogan">&bull; Automatisez &bull; Connectez &bull; Acc&eacute;l&eacute;rez</span>
+        </div>
+
+        <div class="footer-links">
+          <a href="https://github.com/angelolockdev/omniflow" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub Repository</a>
+          <a href="https://github.com/angelolockdev/omniflow/releases" target="_blank" rel="noopener noreferrer" class="footer-link">Releases</a>
+          <a href="https://github.com/angelolockdev/omniflow/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" class="footer-link">MIT License</a>
+        </div>
       </div>
     </footer>
   </main>
 
+  <!-- Interactive Logic: HUD Simulator + Tabs + Copy Box -->
   <script>
-    const simToggle = document.getElementById('sim-toggle');
-    const simPill = document.getElementById('sim-pill');
-    const simTitle = document.getElementById('sim-title');
-    const simDesc = document.getElementById('sim-desc');
-    const simInterceptor = document.getElementById('sim-interceptor');
+    // 1. Interactive HUD Simulator Toggle
+    const hudSwitch = document.getElementById('hud-switch');
+    const hudStatusBadge = document.getElementById('hud-status-badge');
+    const hudStatusTitle = document.getElementById('hud-status-title');
+    const hudStatusDesc = document.getElementById('hud-status-desc');
+    const hudInterceptorState = document.getElementById('hud-interceptor-state');
 
-    if (simToggle) {
-      simToggle.addEventListener('click', () => {
-        const isChecked = simToggle.getAttribute('aria-checked') === 'true';
+    if (hudSwitch) {
+      hudSwitch.addEventListener('click', () => {
+        const isChecked = hudSwitch.getAttribute('aria-checked') === 'true';
         const next = !isChecked;
-        simToggle.setAttribute('aria-checked', String(next));
+        hudSwitch.setAttribute('aria-checked', String(next));
+
         if (next) {
-          simPill.textContent = 'ACTIVE';
-          simPill.classList.remove('is-off');
-          simTitle.textContent = 'Protection Active';
-          simDesc.textContent = 'OmniFlow is active on this tab — region check adapted.';
-          simInterceptor.textContent = 'Active & Patched';
-          simInterceptor.style.color = '#34d399';
+          hudStatusBadge.className = 'badge badge-success';
+          hudStatusBadge.textContent = 'ACTIVE • READY';
+          hudStatusTitle.textContent = 'Regional Protection Active';
+          hudStatusDesc.textContent = 'Eligible parameter in-flight injection active for Google Flow. Direct CDN streaming armed.';
+          hudInterceptorState.textContent = 'Document Start';
+          hudInterceptorState.style.color = '#6ee7b7';
         } else {
-          simPill.textContent = 'DISABLED';
-          simPill.classList.add('is-off');
-          simTitle.textContent = 'Protection Off';
-          simDesc.textContent = 'Engine disarmed. Click switch to re-enable adaptation.';
-          simInterceptor.textContent = 'Standby';
-          simInterceptor.style.color = '#fbbf24';
+          hudStatusBadge.className = 'badge';
+          hudStatusBadge.textContent = 'STANDBY';
+          hudStatusTitle.textContent = 'Engine Inactive';
+          hudStatusDesc.textContent = 'Protection disarmed. Click switch to re-arm in-memory regional adaptation.';
+          hudInterceptorState.textContent = 'Disabled';
+          hudInterceptorState.style.color = '#fbbf24';
+        }
+      });
+    }
+
+    // 2. Browser Quickstart Tabs
+    const tabTriggers = document.querySelectorAll('.tabs-trigger');
+    const tabInstruction = document.getElementById('tab-instruction-text');
+
+    const instructionsMap = {
+      chrome: 'Open <code>chrome://extensions</code> in your browser, switch on <strong>Developer mode</strong>, and click <strong>Load unpacked</strong>.',
+      brave: 'Open <code>brave://extensions</code> in Brave, activate <strong>Developer mode</strong> in top-right, and select <strong>Load unpacked</strong>.',
+      edge: 'Navigate to <code>edge://extensions</code>, enable <strong>Developer mode</strong> in the left sidebar, and click <strong>Load unpacked</strong>.',
+      arc: 'Open <strong>Arc Settings &gt; Extensions</strong> (or <code>arc://extensions</code>), toggle <strong>Developer mode</strong>, and select the folder.',
+    };
+
+    tabTriggers.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        tabTriggers.forEach((b) => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+        const tab = btn.dataset.tab;
+        if (tabInstruction && instructionsMap[tab]) {
+          tabInstruction.innerHTML = instructionsMap[tab];
+        }
+      });
+    });
+
+    // 3. Command Box Click-to-Copy
+    const btnCopy = document.getElementById('btn-copy-cmd');
+    const cmdText = document.getElementById('cmd-text');
+    const iconIdle = document.getElementById('copy-icon-idle');
+    const iconSuccess = document.getElementById('copy-icon-success');
+
+    if (btnCopy && cmdText) {
+      btnCopy.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(cmdText.textContent.trim());
+          if (iconIdle && iconSuccess) {
+            iconIdle.style.display = 'none';
+            iconSuccess.style.display = 'inline-block';
+            setTimeout(() => {
+              iconIdle.style.display = 'inline-block';
+              iconSuccess.style.display = 'none';
+            }, 2000);
+          }
+        } catch {
+          // Fallback
         }
       });
     }
